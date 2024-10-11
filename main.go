@@ -9,6 +9,7 @@ import (
 	"toko_kue/repository"
 
 	"github.com/joho/godotenv"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/echo/v4"
 )
 
@@ -30,7 +31,12 @@ func main() {
 
 	productRepo := &repository.Repo{DB: db}
 	productHandler := &handler.ProductHandler{PR: productRepo}
-
+	// Configure CORS middleware
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://127.0.0.1:5500"}, // Replace with your frontend URL
+		AllowMethods: []string{echo.GET, echo.POST, echo.PUT, echo.DELETE},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 	e.GET("/categories", categoryHandler.GetAllCategory)
 	e.GET("/categories/:id", categoryHandler.GetById)
 	e.POST("/categories", categoryHandler.AddCategory)

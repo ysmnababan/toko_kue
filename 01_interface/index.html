@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Prima Food Solution</title>
+    <!-- icon -->
+    <link rel="icon" href="assets/img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="assets/css/mdb.min.css" />
+    <style>
+      #intro {
+        background-image: url('assets/img/008.jpg');
+        height: 92.6vh;
+      }
+  
+      /* Height for devices larger than 576px */
+      @media (min-width: 992px) {
+        #intro {
+          margin-top: -58px;
+        }
+      }
+  
+      .navbar .nav-link {
+        color: #fff !important;
+      }
+      /* Set a fixed height for the table container */
+      .table-container {
+        height:773px; /* Adjust this value as needed */
+        overflow-y: auto; /* Enable vertical scrolling */
+        margin-top: 20px;
+      }
+
+      /* Ensure the table stretches to fill the container */
+      .table {
+        width: 90%;
+        margin: 0 auto;
+      }
+      .error-message {
+        margin: 0 100px;
+      }
+
+      /* Center align table data */
+  .table td,
+  .table th {
+    text-align: center;
+    vertical-align: middle;
+  }
+    </style>
+
+<script>
+  const API_URL = 'http://localhost:3000'
+</script>
+  </head>
+  <body>
+    <!-- Start your project here-->
+ <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000; background-color: rgb(43, 43, 43);">
+  <div class="container-fluid">
+    <!-- Navbar brand -->
+    <a class="navbar-brand nav-link" target="_blank" href="https://primafoodsolutions.com/">
+      <div class="elementor-widget-container">
+        <div class="main-logo">
+    <!-- <img src="http://primafoodsolutions.com/wp-content/uploads/2021/11/cropped-IPR-logo-new.png" title="logo_pfs" alt="logo_pfs" loading="lazy"> -->
+    </div><!-- .main-logo --> 		</div>
+    </a>
+    <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="#navbarExample01"
+            aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarExample01">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" rel="nofollow" onclick="logout()"
+             target="_blank">Log out</a>
+        </li>
+
+      </ul>
+
+      <ul class="navbar-nav d-flex flex-row">
+        <!-- Icons -->
+        <li class="nav-item me-3 me-lg-0">
+          <div class="nav-link">Hello, <span class="user-name"></span></div>
+        </li>
+        <li class="nav-item me-3 me-lg-0">
+          <a class="nav-link" href="https://www.youtube.com/" rel="nofollow"
+             target="_blank">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </li>
+        <li class="nav-item me-3 me-lg-0">
+          <a class="nav-link" href="https://www.instagram.com/" rel="nofollow" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li>
+        <li class="nav-item me-3 me-lg-0">
+          <a class="nav-link" href="https://www.tiktok.com/" rel="nofollow" target="_blank">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->
+
+<div class="table-container">
+ <h1>Category table</h1>
+  <table class="table align-bottom mb-0 bg-white" id="categoryTable">
+    <thead class="bg-light">
+      <tr>
+        <th>No</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Table rows will be inserted here -->
+    </tbody>
+  </table>
+
+
+
+  <h1>Product table</h1>
+  <table class="table align-bottom mb-0 bg-white" id="productTable">
+    <thead class="bg-light">
+      <tr>
+        <th>No</th>
+        <th>ID</th>
+        <th>Category ID</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Table rows will be inserted here -->
+    </tbody>
+  </table>
+  <div class="error-message" style="color: red; display: none;">Username and password cannot be empty.</div>
+</div>
+
+</header>
+<!--Main Navigation-->
+
+<!--Footer-->
+<footer class="bg-light text-lg-start">
+
+
+<!-- Copyright -->
+<div class="text-center p-3" style="background-color: rgb(43, 43, 43);">
+  © 2024 Copyright:
+  <a class="text-light" href="https://primafoodsolutions.com/">Prima Food Solution</a>
+</div>
+<!-- Copyright -->
+</footer>
+<!--Footer-->
+    <!-- End your project here-->
+
+    <!-- MDB -->
+    <script type="text/javascript" src="assets/js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+
+    
+    <script src="assets/js/load_data.js"></script>
+    <script src="assets/js/load_product.js"></script>
+    <script>
+    </script>
+  </body>
+</html>

@@ -106,5 +106,9 @@ func (r *Repo) DeleteCategory(id int) (*models.Category, error) {
 	if res.Error != nil {
 		return nil, res.Error
 	}
+	res = r.DB.Where("category_id = ?", id).Delete(&models.Product{})
+	if res.Error != nil {
+		return nil, res.Error
+	}
 	return &data, nil
 }
