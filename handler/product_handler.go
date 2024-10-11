@@ -74,9 +74,10 @@ func (h *ProductHandler) UpdateProduct(e echo.Context) error {
 		return helper.ParseError(helper.ErrBindJSON, e)
 	}
 
-	if cat.Name == "" || cat.Code == "" {
+	if cat.Name == "" || cat.Code == "" || cat.Price < 0 || cat.Stock < 0 {
 		return helper.ParseError(helper.ErrParam, e)
 	}
+	
 	cat.ID = uint(id)
 	data, err := h.PR.UpdateProduct(&cat)
 
