@@ -124,6 +124,27 @@
 
 <div class="table-container">
  <h1>Category table</h1>
+
+ <div>
+   <form id="test">
+     <div class="form-group">
+    <label for="inputName">Name</label>
+    <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter name" required>
+  </div>
+  <div class="form-group">
+    <label for="inputCode">Code</label>
+    <input type="text" class="form-control" id="inputCode" name="code" placeholder="Enter code" required>
+  </div>
+  <div class="form-group">
+    <label for="inputDesc">Description</label>
+    <input type="text" class="form-control" id="inputDesc" name="description" placeholder="Enter Description">
+  </div>
+  <button type="submit" class="btn btn-primary">Create new Category</button>
+</form>
+
+</div>
+
+
   <table class="table align-bottom mb-0 bg-white" id="categoryTable">
     <thead class="bg-light">
       <tr>
@@ -188,6 +209,7 @@
     
     <script src="assets/js/load_data.js"></script>
     <script src="assets/js/load_product.js"></script>
+    <script src="assets/js/create.js"></script>
     <script>
     </script>
   </body>

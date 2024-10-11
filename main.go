@@ -20,6 +20,7 @@ func init() {
 	}
 }
 
+
 func main() {
 	db := config.Connect()
 	db.AutoMigrate(&models.Category{})
