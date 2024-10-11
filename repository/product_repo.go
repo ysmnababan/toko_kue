@@ -7,20 +7,16 @@ import (
 	"gorm.io/gorm"
 )
 
-type Repo struct {
-	DB *gorm.DB
+type ProductRepoI interface {
+	GetAllProduct() ([]models.Product, error)
+	GetProductById(id int) (*models.Product, error)
+	AddProduct(cat *models.Product) (*models.Product, error)
+	UpdateProduct(cat *models.Product) (*models.Product, error)
+	DeleteProduct(id int) (*models.Product, error)
 }
 
-type CategoryRepoI interface {
-	GetAllCategory() ([]models.Category, error)
-	GetById(id int) (*models.Category, error)
-	AddCategory(cat *models.Category) (*models.Category, error)
-	UpdateCategory(cat *models.Category) (*models.Category, error)
-	DeleteCategory(id int) (*models.Category, error)
-}
-
-func (r *Repo) IsCodeUnique(code string) (bool, error) {
-	data := models.Category{}
+func (r *Repo) IsCodeProductUnique(code string) (bool, error) {
+	data := models.Product{}
 	res := r.DB.Where("code = ?", code).First(&data)
 	if res.Error == nil {
 		return false, nil
@@ -31,8 +27,8 @@ func (r *Repo) IsCodeUnique(code string) (bool, error) {
 	return false, res.Error
 }
 
-func (r *Repo) GetAllCategory() ([]models.Category, error) {
-	data := []models.Category{}
+func (r *Repo) GetAllProduct() ([]models.Product, error) {
+	data := []models.Product{}
 	res := r.DB.Find(&data)
 	if res.Error != nil {
 		return nil, res.Error
@@ -41,8 +37,8 @@ func (r *Repo) GetAllCategory() ([]models.Category, error) {
 	return data, nil
 }
 
-func (r *Repo) GetById(id int) (*models.Category, error) {
-	data := models.Category{}
+func (r *Repo) GetProductById(id int) (*models.Product, error) {
+	data := models.Product{}
 	res := r.DB.First(&data, id)
 	if res.Error != nil {
 		if res.Error == gorm.ErrRecordNotFound {
@@ -53,7 +49,7 @@ func (r *Repo) GetById(id int) (*models.Category, error) {
 	return &data, nil
 }
 
-func (r *Repo) AddCategory(cat *models.Category) (*models.Category, error) {
+func (r *Repo) AddProduct(cat *models.Product) (*models.Product, error) {
 	codeUnique, err := r.IsCodeUnique(cat.Code)
 	if err != nil || !codeUnique {
 		return nil, helper.ErrCodeExists
@@ -68,8 +64,8 @@ func (r *Repo) AddCategory(cat *models.Category) (*models.Category, error) {
 	return cat, nil
 }
 
-func (r *Repo) UpdateCategory(cat *models.Category) (*models.Category, error) {
-	data := models.Category{}
+func (r *Repo) UpdateProduct(cat *models.Product) (*models.Product, error) {
+	data := models.Product{}
 	res := r.DB.First(&data, cat.ID)
 	if res.Error != nil {
 		return nil, res.Error
@@ -84,6 +80,9 @@ func (r *Repo) UpdateCategory(cat *models.Category) (*models.Category, error) {
 
 	}
 	data.Name = cat.Name
+	data.CategoryID = cat.CategoryID
+	data.Stock = cat.Stock
+	data.Price = cat.Price
 
 	res = r.DB.Save(&data)
 	if res.Error != nil {
@@ -92,8 +91,8 @@ func (r *Repo) UpdateCategory(cat *models.Category) (*models.Category, error) {
 	return &data, nil
 }
 
-func (r *Repo) DeleteCategory(id int) (*models.Category, error) {
-	data := models.Category{}
+func (r *Repo) DeleteProduct(id int) (*models.Product, error) {
+	data := models.Product{}
 	res := r.DB.First(&data, id)
 	if res.Error != nil {
 		if res.Error == gorm.ErrRecordNotFound {

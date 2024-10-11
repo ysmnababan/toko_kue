@@ -22,10 +22,13 @@ func init() {
 func main() {
 	db := config.Connect()
 	db.AutoMigrate(&models.Category{})
+	db.AutoMigrate(&models.Product{})
 	e := echo.New()
 
-	repo := &repository.Repo{DB: db}
-	categoryHandler := &handler.CategoryHandler{CR: repo}
+	categoryRepo := &repository.Repo{DB: db}
+	categoryHandler := &handler.CategoryHandler{CR: categoryRepo}
+
+	
 
 	e.GET("/categories", categoryHandler.GetAllCategory)
 	e.GET("/categories/:id", categoryHandler.GetById)
