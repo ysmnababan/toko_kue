@@ -55,8 +55,18 @@ func (r *Repo) AddProduct(cat *models.Product) (*models.Product, error) {
 		return nil, helper.ErrCodeExists
 	}
 
+	// check if id for category is exist
+	categoryDB := models.Category{ID: cat.CategoryID}
+	res := r.DB.Find(&categoryDB)
+	if res.Error != nil {
+		if res.Error == gorm.ErrRecordNotFound {
+			return nil, helper.ErrNoData
+		}
+		return nil, res.Error
+	}
+
 	// code is unique
-	res := r.DB.Create(cat)
+	res = r.DB.Create(cat)
 	if res.Error != nil {
 		return nil, res.Error
 	}
@@ -68,6 +78,16 @@ func (r *Repo) UpdateProduct(cat *models.Product) (*models.Product, error) {
 	data := models.Product{}
 	res := r.DB.First(&data, cat.ID)
 	if res.Error != nil {
+		return nil, res.Error
+	}
+
+	// check if id for category is exist
+	categoryDB := models.Category{ID: cat.CategoryID}
+	res = r.DB.Find(&categoryDB)
+	if res.Error != nil {
+		if res.Error == gorm.ErrRecordNotFound {
+			return nil, helper.ErrNoData
+		}
 		return nil, res.Error
 	}
 
