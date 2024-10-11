@@ -15,7 +15,7 @@ type CategoryRepoI interface {
 	GetById(id int) (*models.Category, error)
 	AddCategory(cat *models.Category) (*models.Category, error)
 	UpdateCategory(cat *models.Category) (*models.Category, error)
-	DeleteCategory(id int) error
+	DeleteCategory(id int) (*models.Category, error)
 }
 
 func (r *Repo) GetAllCategory() ([]models.Category, error) {
@@ -34,6 +34,6 @@ func (r *Repo) UpdateCategory(cat *models.Category) (*models.Category, error) {
 	return nil, nil
 }
 
-func (r *Repo) DeleteCategory(id int) error {
-	return nil
+func (r *Repo) DeleteCategory(id int) (*models.Category, error) {
+	return nil, nil
 }
