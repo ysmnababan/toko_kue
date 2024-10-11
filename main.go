@@ -31,7 +31,7 @@ func main() {
 	e.GET("/categories/:id", categoryHandler.GetById)
 	e.POST("/categories", categoryHandler.AddCategory)
 	e.PUT("/categories/:id", categoryHandler.UpdateCategory)
-	e.PUT("/categories/:id", categoryHandler.DeleteCategory)
+	e.DELETE("/categories/:id", categoryHandler.DeleteCategory)
 
 	log.Fatal(e.Start(":" + os.Getenv("PORT")))
 }

@@ -76,8 +76,7 @@ func (h *CategoryHandler) UpdateCategory(e echo.Context) error {
 	if cat.Name == "" || cat.Code == "" {
 		return helper.ParseError(helper.ErrParam, e)
 	}
-	cat.CategoryID = uint(id)
-
+	cat.ID = uint(id)
 	data, err := h.CR.UpdateCategory(&cat)
 
 	if err != nil {

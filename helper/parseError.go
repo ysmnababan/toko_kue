@@ -15,8 +15,10 @@ var (
 	ErrInvalidDateFormat = errors.New("invalid date format")
 	ErrBindJSON          = errors.New("unable to bind json")
 	ErrUserExists        = errors.New("user already exist")
+	ErrCodeExists        = errors.New("code already exist")
 
 	ErrNoRows        = errors.New("no rows in result set")
+	ErrNoCategory    = errors.New("no category in result set")
 	ErrScan          = errors.New("row scanning failed")
 	ErrRowsAffected  = errors.New("unable to get affected row")
 	ErrNoAffectedRow = errors.New("rows affected is 0")
@@ -54,6 +56,9 @@ func ParseError(err error, ctx echo.Context) error {
 		status = http.StatusBadRequest
 
 	case errors.Is(err, ErrUserExists):
+		status = http.StatusBadRequest
+
+	case errors.Is(err, ErrCodeExists):
 		status = http.StatusBadRequest
 
 	case errors.Is(err, ErrNoUpdate):
